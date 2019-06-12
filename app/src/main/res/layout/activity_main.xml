@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".MainActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
     <Button
         android:id="@+id/predict"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#66bb6a"
+        android:fontFamily="@font/roboto_medium"
+        android:padding="15dp"
         android:text="Predict"
-        tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="235dp" />
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        tools:ignore="HardcodedText" />
+
     <Button
         android:id="@+id/upload"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#66bb6a"
+        android:fontFamily="@font/roboto_medium"
+        android:padding="15dp"
         android:text="Upload"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="130dp" />
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        tools:ignore="HardcodedText" />
+
     <Button
         android:id="@+id/train"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#66bb6a"
+        android:fontFamily="@font/roboto_medium"
+        android:padding="15dp"
         android:text="Train"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="341dp" />
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        tools:ignore="HardcodedText" />
+
 </LinearLayout>
-</android.support.constraint.ConstraintLayout>

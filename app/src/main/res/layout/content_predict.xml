@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,83 +7,61 @@
     tools:context="com.example.leaf.PredictActivity"
     tools:showIn="@layout/activity_predict">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2">
-
-        <io.fotoapparat.view.CameraView
-            android:id="@+id/camera_view"
-            android:layout_width="256dp"
-            android:layout_height="256dp"
-            android:layout_centerInParent="true" />
-
-        <TextView
-            android:id="@+id/no_permission"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_horizontal|bottom"
-            android:text="No Camera permission granted."
-            android:textSize="20sp"
-            android:visibility="gone"
-            tools:ignore="HardcodedText"
-            tools:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/gambar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_imei"
+        <com.example.leaf.layout.SquareRelativeLayout
+            android:id="@+id/CameraLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <io.fotoapparat.view.CameraView
+                android:id="@+id/camera_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Hint :" />
+            <ImageView
+                android:id="@+id/gambar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Capture foto memenuhi kamera." />
+            <TextView
+                android:id="@+id/no_permission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:text="No Camera permission granted."
+                android:visibility="gone"
+                tools:ignore="HardcodedText"
+                tools:visibility="visible" />
 
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-condensed"
+                android:shadowColor="@color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="Use Camera to Capture Leaf"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText"
+                tools:visibility="visible" />
+        </com.example.leaf.layout.SquareRelativeLayout>
 
         <Button
             android:id="@+id/btn_capture"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Capture"
-            android:textSize="12sp" />
-
-    </RelativeLayout>
-
-</LinearLayout>
+            android:textSize="18sp" />
+    </LinearLayout>
+</RelativeLayout>

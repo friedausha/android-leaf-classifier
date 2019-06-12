@@ -7,17 +7,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/white"/>
-            <!--app:titleTextAppearance="@style/Toolbar.TitleText"-->
-            <!--app:titleTextColor="@android:color/black" />-->
-
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="wrap_content" />
 
     <include layout="@layout/content_upload" />
 

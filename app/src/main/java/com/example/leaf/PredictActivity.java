@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.leaf.Response.ResponseApi;
@@ -49,17 +50,23 @@ public class PredictActivity extends AppCompatActivity {
 
     private final PermissionsDelegate permissionsDelegate = new PermissionsDelegate(this);
     private boolean hasCameraPermission;
+    private RelativeLayout cameraLayout;
     private CameraView cameraView;
     private Button capture;
     private Fotoapparat fotoapparat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predict);
 
+        cameraLayout = findViewById(R.id.CameraLayout);
         cameraView = findViewById(R.id.camera_view);
         capture = findViewById(R.id.btn_capture);
         hasCameraPermission = permissionsDelegate.hasCameraPermission();
+
+
+        cameraLayout.getLayoutParams().height = cameraLayout.getLayoutParams().width;
 
         if (hasCameraPermission) {
             cameraView.setVisibility(View.VISIBLE);
@@ -70,6 +77,7 @@ public class PredictActivity extends AppCompatActivity {
         fotoapparat = createFotoapparat();
         takePictureOnClick();
     }
+
     private Fotoapparat createFotoapparat() {
         return Fotoapparat
                 .with(this)
@@ -117,9 +125,9 @@ public class PredictActivity extends AppCompatActivity {
                             Log.e(LOGGING_TAG, "Couldn't capture photo.");
                             return;
                         }
-                        Log.d("cek", "whenDone: "+bitmapPhoto);
+                        Log.d("cek", "whenDone: " + bitmapPhoto);
                         ImageView imageView = findViewById(R.id.gambar);
-                        Bitmap bitmap1 = RotateBitmap(bitmapPhoto.bitmap,-bitmapPhoto.rotationDegrees+180);
+                        Bitmap bitmap1 = RotateBitmap(bitmapPhoto.bitmap, -bitmapPhoto.rotationDegrees + 180);
                         bitmap1 = flip(bitmap1);
                         send(bitmap1);
                     }
@@ -169,12 +177,12 @@ public class PredictActivity extends AppCompatActivity {
     }
 
     public void send(Bitmap bitmap) {
-        Bitmap result = Bitmap.createScaledBitmap(bitmap, 96,96, true);
+        Bitmap result = Bitmap.createScaledBitmap(bitmap, 96, 96, true);
         String myBase64Image = Constans.encodeToBase64(result, Bitmap.CompressFormat.JPEG, 100);
 
         Call<ResponseApi> predict;
         ApiClientAttendance api = Server.builder().create(ApiClientAttendance.class);
-        predict = api.predict("data:image/jpeg;base64,"+myBase64Image);
+        predict = api.predict("data:image/jpeg;base64," + myBase64Image);
 
         final SweetAlertDialog pDialog = new SweetAlertDialog(PredictActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -185,12 +193,11 @@ public class PredictActivity extends AppCompatActivity {
         predict.enqueue(new Callback<ResponseApi>() {
             @Override
             public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
-                if (response.code() == 200)
-                {
+                if (response.code() == 200) {
                     pDialog.dismiss();
 
                     String r = response.body().getMsg();
-                    String[] result = r.trim().toString().split(",");
+                    String[] result = r.trim().split(",");
 
                     if (result[0].equals("ACCEPTED")) {
                         new SweetAlertDialog(PredictActivity.this, SweetAlertDialog.SUCCESS_TYPE)
@@ -215,9 +222,7 @@ public class PredictActivity extends AppCompatActivity {
                                     }
                                 }).show();
                     }
-                }
-                else
-                {
+                } else {
                     pDialog.dismiss();
                     new SweetAlertDialog(PredictActivity.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Error")
