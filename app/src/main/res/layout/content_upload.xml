@@ -22,9 +22,10 @@
             android:id="@+id/no_permission"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
+            android:layout_alignBottom="@+id/camera_view"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="0dp"
             android:text="No Camera permission granted."
             android:textSize="20sp"
             android:visibility="gone"
@@ -38,28 +39,25 @@
         android:layout_height="wrap_content"
         android:padding="10dp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
 
         <EditText
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:hint="Masukkan nama daun    " />
+            android:layout_marginBottom="20dp"
+            android:hint="Masukkan nama daun    "
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/btn_capture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Capture"
             android:backgroundTint="#66bb6a"
             android:fontFamily="@font/roboto_medium"
             android:padding="15dp"
+            android:text="Capture"
+            android:textColor="@color/white"
             android:textSize="18sp" />
-
-    </RelativeLayout>
 
 </LinearLayout>

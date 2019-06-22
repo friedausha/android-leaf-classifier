@@ -182,7 +182,7 @@ public class PredictActivity extends AppCompatActivity {
 
         Call<ResponseApi> predict;
         ApiClientAttendance api = Server.builder().create(ApiClientAttendance.class);
-        predict = api.predict("data:image/jpeg;base64," + myBase64Image);
+        predict = api.predict("data:image/jpg;base64," + myBase64Image);
 
         final SweetAlertDialog pDialog = new SweetAlertDialog(PredictActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -190,38 +190,28 @@ public class PredictActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
         pDialog.show();
 
+        System.out.println("predict" + myBase64Image);
+
         predict.enqueue(new Callback<ResponseApi>() {
             @Override
             public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
+                System.out.println("Hi tayo" + response);
                 if (response.code() == 200) {
                     pDialog.dismiss();
 
                     String r = response.body().getMsg();
+                    System.out.println(r);
                     String[] result = r.trim().split(",");
-
-                    if (result[0].equals("ACCEPTED")) {
-                        new SweetAlertDialog(PredictActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                .setTitleText("Hasil")
-                                .setContentText(response.body().getMsg())
-                                .setConfirmText("OK")
-                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sDialog) {
-                                        sDialog.dismiss();
-                                    }
-                                }).show();
-                    } else {
-                        new SweetAlertDialog(PredictActivity.this, SweetAlertDialog.WARNING_TYPE)
-                                .setTitleText("Error")
-                                .setContentText(response.body().getMsg())
-                                .setConfirmText("OK")
-                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sDialog) {
-                                        sDialog.dismiss();
-                                    }
-                                }).show();
-                    }
+                    new SweetAlertDialog(PredictActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Hasil")
+                            .setContentText(response.body().getMsg())
+                            .setConfirmText("OK")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            }).show();
                 } else {
                     pDialog.dismiss();
                     new SweetAlertDialog(PredictActivity.this, SweetAlertDialog.WARNING_TYPE)

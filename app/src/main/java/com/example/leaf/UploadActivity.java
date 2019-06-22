@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -156,13 +157,15 @@ public class UploadActivity extends AppCompatActivity {
         String name = textView.getText().toString();
         String myBase64Image = Constans.encodeToBase64(result, Bitmap.CompressFormat.JPEG, 100);
         ApiClientAttendance api = Server.builder().create(ApiClientAttendance.class);
-        Call<ResponseApi> upload = api.upload(name, "data:image/jpeg;base64,"+myBase64Image);
+
+        Call<ResponseApi> upload = api.upload(name, "data:image/jpg;base64,"+myBase64Image);
 
         final SweetAlertDialog pDialog = new SweetAlertDialog(UploadActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Loading");
         pDialog.setCancelable(false);
         pDialog.show();
+        System.out.println("upload"+myBase64Image);
 
         upload.enqueue(new Callback<ResponseApi>() {
             @Override

@@ -9,16 +9,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Server {
     private static Retrofit retrofit = null;
-    public final static String BASE_URL = "http://localhost:8080/";
+    public final static String BASE_URL = "http://6c70ced4.ngrok.io ";
 
     public static Retrofit builder() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .connectTimeout(120, TimeUnit.SECONDS)
-                .writeTimeout(120, TimeUnit.SECONDS)
-                .readTimeout(120, TimeUnit.SECONDS)
+                .connectTimeout(10000, TimeUnit.SECONDS)
+                .writeTimeout(10000, TimeUnit.SECONDS)
+                .readTimeout(10000, TimeUnit.SECONDS)
                 .build();
 
         if (retrofit == null){
